@@ -4,6 +4,19 @@ from botocore.exceptions import ClientError
 
 
 
+import toml
+
+# Carregar o arquivo de configuração
+config = toml.load("config.toml")
+
+# Acessar as credenciais
+aws_access_key_id = config['aws']['aws_access_key_id']
+aws_secret_access_key = config['aws']['aws_secret_access_key']
+aws_region = config['aws']['aws_region']
+
+agent_id = config['agent']['agent_id']
+agent_alias_id = config['agent']['agent_alias_id']
+
 import uuid
 
 def generate_session_id():
@@ -14,9 +27,9 @@ session_id = generate_session_id()
 print("Session ID:", session_id)
 
 # Set up AWS credentials
-aws_access_key_id = st.sidebar.text_input("AWS Access Key ID", type="password")
-aws_secret_access_key = st.sidebar.text_input("AWS Secret Access Key", type="password")
-aws_region = st.sidebar.text_input("AWS Region", value="sa-east-1")
+# aws_access_key_id = st.sidebar.text_input("AWS Access Key ID", type="password")
+# aws_secret_access_key = st.sidebar.text_input("AWS Secret Access Key", type="password")
+# aws_region = st.sidebar.text_input("AWS Region", value="sa-east-1")
 
 # Initialize Bedrock client
 bedrock_runtime = boto3.client(
